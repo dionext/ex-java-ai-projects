@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: multy-model
+  ai:
+    ############################################################
+    ###  openAI
+    ############################################################
+    # https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html
+    # export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
+    openai:
+      #api-key:
+
+      #Name of the the OpenAI Chat model to use. You can select between models such as: gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo
+      #See the models page for more information. https://platform.openai.com/docs/models
+      chat:
+        options: {}
+        #model: gpt-4o
+
+        #The sampling temperature to use that controls the apparent creativity of generated completions.
+        # Higher values will make output more random while lower values will make results more focused and deterministic.
+        # It is not recommended to modify temperature and top_p for the same completions request as the interaction
+        # of these two settings is difficult to predict.
+
+        #temperature: 0.8
+
+    ############################################################
+    ###  ollama
+    ############################################################
+    # https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html
+    # models list https://github.com/ollama/ollama?tab=readme-ov-file#model-library
+    ollama:
+      chat:
+        options:
+          model: llama3.2:3b
+          #temperature: 0:5
+          #format: json
+      #for remote
+      #base-url: http://localhost:11434
+      #base-url: http://192.168.1.149:11434

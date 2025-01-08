@@ -1,0 +1,43 @@
+############################################################
+###  ollama
+############################################################
+# https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html
+# models list https://github.com/ollama/ollama?tab=readme-ov-file#model-library
+
+# !Tips
+#Ollama is OpenAI API-compatible and you can use the Spring AI OpenAI client to talk to Ollama and use tools.
+#For this, you need to configure the OpenAI base URL to your Ollama instance:
+#spring.ai.openai.chat.base-url=http://localhost:11434 and select one of the provided Ollama models:
+#spring.ai.openai.chat.options.model=mistral
+
+spring:
+  application:
+    name: "simple-ollama"
+  ai:
+    ollama:
+      # auto pull
+      #init:
+        #pull-model-strategy: when_missing
+        #timeout: 60s
+        #max-retries: 1
+      chat:
+        options:
+          #model: llama3.2:3b
+          #model: llama3.1
+          model: mistral
+          #temperature: 0:5
+          #The format to return a response in. Currently, the only accepted value is json
+          #format: json
+          #Controls how long the model will stay loaded into memory following the request     5m
+          #keep_alive: 5m
+
+
+      #for embedding
+      embedding:
+        options:
+          # example how to use model from HuggingFace
+          #model: hf.co/mixedbread-ai/mxbai-embed-large-v1:
+
+      #for remote
+      #base-url: http://localhost:11434
+      #base-url: http://192.168.1.76:11434
