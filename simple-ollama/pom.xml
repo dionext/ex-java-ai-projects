@@ -66,9 +66,36 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.32</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<!-- to prevent warning  and skip tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.2</version>
+				<configuration>
+					<argLine>
+						-javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+						-Xshare:off
+					</argLine>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${project.parent.version}</version>
+				<version>${spring.boot.maven.plugin.version}</version>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -77,6 +104,7 @@
 						</exclude>
 					</excludes>
 				</configuration>
+
 				<executions>
 					<execution>
 						<id>build-info</id>
@@ -96,12 +124,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<!-- for docker -->
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.13</version>
 			</plugin>
 		</plugins>
 	</build>
